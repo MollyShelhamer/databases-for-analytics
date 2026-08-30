@@ -1,6 +1,6 @@
 # Exercise 01: World Database SQL Practice
 
-- Name:
+- Name: Molly Shelhamer
 - Course: Database for Analytics
 - Module: 1
 - Database Used: World Database
@@ -35,11 +35,10 @@ Why were these data types selected?
 
 ### Answer
 
-_Write your explanation here._
+country.Population is data type int, as population as a value is always a whole number, not a decimal or negative.
+country.LifeExpectancy is data type decimal, as it is likely an average calculation that results in a decimal value.
 
 ### Screenshot
-
-_Show the table structure or DESCRIBE output._
 
 ```sql
 DESCRIBE country;
@@ -56,8 +55,7 @@ Why do you think this data type was selected?
 
 ### Answer
 
-_Write your explanation here._
-
+The data type of country.IndepYear is smallint. This is likely due to the fact that a year is a whole number and a relatively small one.
 ### Screenshot
 
 ```sql
@@ -75,7 +73,7 @@ Explain why your proposed data type might be better in some situations.
 
 ### Answer
 
-_Write your explanation here._
+Using int instead of smallint would likely run into less data type and calculation problems, while only taking up slightly more space.
 
 ---
 
