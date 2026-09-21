@@ -34,7 +34,14 @@ along with the **number of official languages spoken**.
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT c.Name, COUNT(cl.Language) AS number_of_official_languages
+FROM country c
+JOIN countrylanguage cl
+  ON c.Code = cl.CountryCode
+WHERE cl.IsOfficial = 'T'
+GROUP BY c.Name
+HAVING COUNT(cl.Language) > 2
+ORDER BY number_of_official_languages DESC;
 ```
 
 ### Screenshot
@@ -56,7 +63,19 @@ execute the query from Question 1 and
 ### Python Code
 
 ```python
-# Your three Python statements here
+query = """
+SELECT c.name, COUNT(cl.language) AS number_of_official_languages
+FROM country c
+JOIN countrylanguage cl
+  ON c.code = cl.countrycode
+WHERE cl.isofficial = 'T'
+GROUP BY c.name
+HAVING COUNT(cl.language) > 2
+ORDER BY number_of_official_languages DESC;
+"""
+
+results = pd.read_sql_query(query, engine)
+display(results)
 ```
 
 ### Screenshot
@@ -77,7 +96,26 @@ to produce the following graph:
 ### Python Code
 
 ```python
-# Your Python code here
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 6))
+ax = plt.gca()
+
+bars = ax.bar(
+    range(len(results["name"])),
+    results["number_of_official_languages"],
+    color="steelblue",
+    label="num_languages",
+)
+
+ax.set_xticks(range(len(results["name"])))
+ax.set_xticklabels(results["name"], rotation=90, ha="right")
+ax.set_xlabel("Country")
+ax.set_ylabel("Number of Official Languages")
+ax.legend(loc="upper right")
+
+plt.subplots_adjust(bottom=0.25, left=0.08)
+plt.show()
 ```
 
 ### Screenshot
