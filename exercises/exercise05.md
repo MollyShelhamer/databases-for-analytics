@@ -1,8 +1,8 @@
 # Exercise 05: SQLDA Database - Dates, Data Quality, Arrays, and JSON
 
-- Name:
+- Name: Molly Shelhamer
 - Course: Database for Analytics
-- Module:
+- Module: 5
 - Database Used: `sqlda` (Sample Datasets)
 - Tools Used: PostgreSQL (pgAdmin or psql)
 
@@ -43,7 +43,10 @@ year
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT DISTINCT EXTRACT(YEAR FROM sent_date)::integer AS year
+FROM emails
+WHERE sent_date IS NOT NULL
+ORDER BY year;
 ```
 
 ### Screenshot
@@ -68,7 +71,13 @@ count   year
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT
+    COUNT(*) AS count,
+    EXTRACT(YEAR FROM sent_date)::integer AS year
+FROM emails
+WHERE sent_date IS NOT NULL
+GROUP BY year
+ORDER BY year;
 ```
 
 ### Screenshot
@@ -90,7 +99,13 @@ Only include emails that contain **both** a sent date and an opened date.
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT
+        sent_date,
+        opened_date,
+        opened_date - sent_date AS opened_interval
+FROM emails
+WHERE sent_date IS NOT NULL
+    AND opened_date IS NOT NULL;
 ```
 
 ### Screenshot
@@ -108,7 +123,11 @@ show emails that contain an **opened date BEFORE the sent date**.
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT *
+FROM emails
+WHERE opened_date IS NOT NULL
+    AND sent_date IS NOT NULL
+    AND opened_date < sent_date;
 ```
 
 ### Screenshot
@@ -127,7 +146,8 @@ After looking at the data, **why is this the case?**
 
 ### Answer
 
-_Write your explanation here._
+It appears that the sent_date column is formatted for date and time, without the time updated from a default.
+Therefore, if an email was opened the same day it was sent, it can appear earlier as the opened_date column is updated.
 
 ### Screenshot (if requested by instructor)
 
@@ -168,7 +188,7 @@ CREATE TEMP TABLE customer_dealership_distance AS (
 
 ### Answer
 
-_Write your explanation here._
+The code creates three tables. The first two creates a location for each customer and dealership. The third joins the first two and calculates distance between them.
 
 ---
 
@@ -188,7 +208,12 @@ For example - dealership 1 is below:
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT
+    dealership_id,
+    array_agg(last_name || ',' || first_name ORDER BY salesperson_id)
+FROM salespeople
+GROUP BY dealership_id
+ORDER BY dealership_id;
 ```
 
 ### Screenshot
@@ -214,7 +239,15 @@ Reference image:
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT
+    d.dealership_id,
+    d.state,
+    COUNT(s.salesperson_id) AS count,
+    array_agg(s.last_name || ',' || s.first_name ORDER BY s.salesperson_id)
+FROM dealerships AS d
+JOIN salespeople AS s USING (dealership_id)
+GROUP BY d.dealership_id, d.state
+ORDER BY d.state, d.dealership_id;
 ```
 
 ### Screenshot
@@ -231,7 +264,8 @@ the **customers** table to **JSON**.
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT row_to_json(customers)
+FROM customers;
 ```
 
 ### Screenshot
@@ -258,7 +292,18 @@ Reference image:
 ### SQL
 
 ```sql
--- Your SQL here
+SELECT row_to_json(dealership_data)
+FROM (
+    SELECT
+        d.dealership_id,
+        d.state,
+        COUNT(s.salesperson_id) AS num_salespeople,
+        array_agg(s.last_name || ',' || s.first_name ORDER BY s.salesperson_id)
+    FROM dealerships AS d
+    JOIN salespeople AS s USING (dealership_id)
+    GROUP BY d.dealership_id, d.state
+    ORDER BY d.state, d.dealership_id
+) AS dealership_data;
 ```
 
 ### Screenshot
