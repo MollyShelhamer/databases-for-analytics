@@ -16,7 +16,7 @@
 
 ## 3. Data Dictionary
 
-(project_data_dictionary.png)
+(screenshots/project_data_dictionary.png)
 
 ## 4. Installation and Verification
 
