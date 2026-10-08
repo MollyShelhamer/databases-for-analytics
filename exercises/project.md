@@ -11,9 +11,9 @@
 - **Purpose:** Analyze Netflix titles and viewing trends.
 
 ## 2. Data Dimensions
-
+'''
 (screenshots/project_data_dimensions.png)
-
+---
 ## 3. Data Dictionary
 
 (screenshots/project_data_dictionary.png)
