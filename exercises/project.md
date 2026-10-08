@@ -18,6 +18,8 @@
 
 ![DataDictionary](screenshots/project_data_dictionary.png)
 
+- **Source:** [Netflix Sample Database](https://github.com/lerocha/netflixdb)
+
 ## 4. Installation and Verification
 
 Downloaded the PostgreSQL script from the public GitHub repository, created a database, and executed the script in pgAdmin. Verified the tables, column definitions, and record counts.
