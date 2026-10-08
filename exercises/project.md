@@ -16,7 +16,7 @@
 
 ## 3. Data Dictionary
 
-(screenshots/project_data_dictionary.png)
+![DataDictionary](screenshots/project_data_dictionary.png)
 
 ## 4. Installation and Verification
 
@@ -31,10 +31,10 @@ SELECT * FROM tv_show LIMIT 10;
 SELECT * FROM view_summary LIMIT 10;
 ```
 
-![Movies](project_movie.png)
-![Seaons](project_season.png)
-![TVShows](project_show.png)
-![Views](project_views.png)
+![Movies](screenshots/project_movie.png)
+![Seaons](screenshots/project_season.png)
+![TVShows](screenshots/project_show.png)
+![Views](screenshots/project_views.png)
 
 ## 6. SQL Analysis
 
@@ -53,7 +53,7 @@ ORDER BY v.hours_viewed DESC
 LIMIT 10;
 ```
 
-![Query1](project_query1.png)
+![Query1](screenshots/project_query1.png)
 
 ### Query 2: Viewing Hours by Movie
 
@@ -69,4 +69,4 @@ ORDER BY total_hours_viewed DESC
 LIMIT 10;
 ```
 
-![Query2](project_query2.png)
+![Query2](screenshots/project_query2.png)
