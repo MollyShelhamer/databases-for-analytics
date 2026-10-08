@@ -12,7 +12,7 @@
 
 ## 2. Data Dimensions
 
-(screenshots/q1_datatypes.png)
+![DataDimensionScreenshot](screenshots/project_data_dimensions.png)
 
 ## 3. Data Dictionary
 
