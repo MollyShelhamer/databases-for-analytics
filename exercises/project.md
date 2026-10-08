@@ -12,7 +12,7 @@
 
 ## 2. Data Dimensions
 
-(project_data_dimensions.png)
+(screenshots/project_data_dimensions.png)
 
 ## 3. Data Dictionary
 
